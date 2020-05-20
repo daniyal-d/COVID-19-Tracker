@@ -1,6 +1,5 @@
 import json
 from datetime import time
-
 import requests
 
 key = "t37zQwBDTofT"  # API key
