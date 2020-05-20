@@ -5,8 +5,7 @@ import requests
 key = "t37zQwBDTofT"  # API key
 p_token = "tipxNh4q9VpT"  # API token
 
-info = input(
-    "Coronavirus Tracker \n \n What do you wish to view \n \n Type 'wc' for worldwide cases \n Type 'wd' for worldwide deaths \n Type 'wr' for worldwide recoveries \n Type 'c' for the info on a specific country \n")
+info = input("Coronavirus Tracker \n \n What do you wish to view \n \n Type 'wc' for worldwide cases \n Type 'wd' for worldwide deaths \n Type 'wr' for worldwide recoveries \n Type 'c' for the info on a specific country \n")
 
 
 class Tracker:
@@ -19,8 +18,7 @@ class Tracker:
         self.stats = self.data()
 
     def data(self):
-        case = requests.get(f'https://www.parsehub.com/api/v2/projects/{p_token}/last_ready_run/data',
-                            params={"api_key": key})
+        case = requests.get(f"https://www.parsehub.com/api/v2/projects/{p_token}/last_ready_run/data", params={"api_key": key})
         stats = json.loads(case.text)
         return stats
 
@@ -47,8 +45,7 @@ class Tracker:
         state = input("Which countries data do you want to view?: ")
         for data in country:
             if data["name"].lower() == state.lower():
-                return (
-                    f"Info for {state} \n Cases: {data['states_cases']} \n Deaths: {data['states_deaths']} \n Recoveries: {data['states_recovered']}")
+                return (f"Info for {state} \n Cases: {data['states_cases']} \n Deaths: {data['states_deaths']} \n Recoveries: {data['states_recovered']}")
 
     def new_info(self, threading=None):
         hello = requests.post(f'https://www.parsehub.com/api/v2/projects/{p_token}/run', params={"api_key": key})
