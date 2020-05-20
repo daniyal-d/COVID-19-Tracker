@@ -63,14 +63,13 @@ class Tracker:
                 if new_info != old_info:
                     self.stats = new_info
                     break
-                time.sleep(1)
-
+                time.sleep(0.1)
+        data.new_info()
         threading = threading.Thread(target=update)
         threading.start()
 
 
 data = Tracker(key, p_token)
-
 if info == "wc":
     print(f"Worldwide Cases: {data.worldwide_cases()}")
 
