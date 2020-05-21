@@ -1,6 +1,7 @@
 import json
 from datetime import time
 import requests
+import threading
 
 key = "t37zQwBDTofT"  # API key
 p_token = "tipxNh4q9VpT"  # API token
@@ -47,33 +48,37 @@ class Tracker:
             if data["name"].lower() == state.lower():
                 return (f"Info for {state} \n Cases: {data['states_cases']} \n Deaths: {data['states_deaths']} \n Recoveries: {data['states_recovered']}")
 
-    def new_info(self, threading=None):
-        hello = requests.post(f'https://www.parsehub.com/api/v2/projects/{p_token}/run', params={"api_key": key}) # Updates data
-        stats = json.loads(hello.text) # JSON form of updated data
+    def new_info(self):
+        hello = requests.post(f'https://www.parsehub.com/api/v2/projects/{p_token}/run', params={"api_key": key})
+        stats = json.loads(hello.text)
 
         def update():
             time.sleep(0.1)
             old_info = self.stats
             while True:
-                new_info = stats()
+                new_info = stats
                 if new_info != old_info:
-                    self.stats = new_info # Convert old data into new data
+                    self.stats = new_info
                     break
                 time.sleep(0.1)
-        data.new_info()
-        threading = threading.Thread(target=update)
-        threading.start()
+
+        thread = threading.Thread(target=update)
+        thread.start()
 
 
 data = Tracker(key, p_token)
 if info == "wc":
+    data.new_info()
     print(f"Worldwide Cases: {data.worldwide_cases()}")
 
 elif info == "wd":
+    data.new_info()
     print(f"Worldwide Deaths: {data.worldwide_deaths()}")
 
 elif info == "wr":
+    data.new_info()
     print(f"Worldwide Recoveries: {data.worldwide_recovered()}")
 
 elif info == "c":
+    data.new_info()
     print(data.states())
