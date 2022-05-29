@@ -3,8 +3,8 @@ import time
 import requests
 import threading
 
-key = "API KEY"  # API key (I choose not to share mine)
-p_token = "PROJECT TOKEN"  # API token (I choose not to share mine)
+key = "API KEY"  # API key
+p_token = "PROJECT TOKEN"  # API token
 
 info = input("Coronavirus Tracker \n \n What do you wish to view \n \n Type 'wc' for worldwide cases \n Type 'wd' for worldwide deaths \n Type 'wr' for worldwide recoveries \n Type 'c' for the info on a specific country \n")
 
